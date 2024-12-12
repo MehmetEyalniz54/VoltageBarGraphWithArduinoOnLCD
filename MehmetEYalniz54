@@ -1,0 +1,522 @@
+#include <LiquidCrystal_I2C.h>
+#include <Wire.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2); // I2C address 0x27, 16 column and 2 rows
+
+byte customChar0[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar1[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar2[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar3[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar4[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar5[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar6[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar7[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar8[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar9[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar10[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar11[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar12[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar13[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar14[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+byte customChar15[8] = {
+ 0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111,
+	0b11111
+};
+
+
+
+const int analogGirisPini= A1;
+int potansiyometreDegeri=0;
+float Voltage=0;
+void setup()
+{
+  lcd.init(); 
+  lcd.backlight();
+
+
+  Serial.begin(9600);
+}
+
+void loop()
+{
+  lcd.clear();
+  pinMode(A1,INPUT);
+potansiyometreDegeri=analogRead(analogGirisPini);
+Voltage=(potansiyometreDegeri / 1023.0)*5.0;
+Serial.print("Potansiyometre Değeri:");
+Serial.print(potansiyometreDegeri);
+Serial.print("Voltage Value:");
+Serial.print(Voltage);
+delay(500);
+
+lcd.setCursor(0,1);
+lcd.print("Voltage:");
+lcd.print(Voltage);
+
+int BarDeger=0;
+BarDeger = map(potansiyometreDegeri, 0, 1023, 1, 16);
+
+if (BarDeger >= 1 && BarDeger < 2) 
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+ }
+ else if (BarDeger >= 2 && BarDeger < 3) 
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+ }
+ else if (BarDeger >= 3 && BarDeger < 4)
+ {
+   lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+ }
+ else if (BarDeger >= 4 && BarDeger < 5)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+ }
+ else if (BarDeger >= 5 && BarDeger < 6)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  }
+ else if (BarDeger >= 6 && BarDeger < 7)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  }
+ else if (BarDeger >= 7 && BarDeger < 8)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  }
+ else if (BarDeger >= 8 && BarDeger < 9)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  }
+ else if (BarDeger >= 9 && BarDeger < 10)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  }
+ else if (BarDeger >= 10 && BarDeger < 11)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  }
+ else if (BarDeger >= 11 && BarDeger < 12)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  lcd.setCursor(10, 0);
+  lcd.write((byte)10);
+  }
+ else if (BarDeger >= 12 && BarDeger < 13)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  lcd.setCursor(10, 0);
+  lcd.write((byte)10);
+  lcd.setCursor(11, 0);
+  lcd.write((byte)11);
+  }
+ else if (BarDeger >= 13 && BarDeger < 14)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  lcd.setCursor(10, 0);
+  lcd.write((byte)10);
+  lcd.setCursor(11, 0);
+  lcd.write((byte)11);
+  lcd.setCursor(12, 0);
+  lcd.write((byte)12);
+  }
+ else if (BarDeger >= 14 && BarDeger < 15)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  lcd.setCursor(10, 0);
+  lcd.write((byte)10);
+  lcd.setCursor(11, 0);
+  lcd.write((byte)11);
+  lcd.setCursor(12, 0);
+  lcd.write((byte)12);
+  lcd.setCursor(13, 0);
+  lcd.write((byte)13);
+  }
+ else if (BarDeger >= 15 && BarDeger < 16)
+ {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  lcd.setCursor(10, 0);
+  lcd.write((byte)10);
+  lcd.setCursor(11, 0);
+  lcd.write((byte)11);
+  lcd.setCursor(12, 0);
+  lcd.write((byte)12);
+  lcd.setCursor(13, 0);
+  lcd.write((byte)13);
+  lcd.setCursor(14, 0);
+  lcd.write((byte)14);
+  }
+  else if (BarDeger == 16)
+  {
+  lcd.setCursor(0, 0);
+  lcd.write((byte)0);
+  lcd.setCursor(1, 0);
+  lcd.write((byte)1);
+  lcd.setCursor(2, 0); 
+  lcd.write((byte)2);
+  lcd.setCursor(3,0);
+  lcd.write((byte)3);
+  lcd.setCursor(4,0);
+  lcd.write((byte)4);
+  lcd.setCursor(5,0);
+  lcd.write((byte)5);
+  lcd.setCursor(6, 0);
+  lcd.write((byte)6);
+  lcd.setCursor(7, 0);
+  lcd.write((byte)7);
+  lcd.setCursor(8, 0);
+  lcd.write((byte)8);
+  lcd.setCursor(9, 0);
+  lcd.write((byte)9);
+  lcd.setCursor(10, 0);
+  lcd.write((byte)10);
+  lcd.setCursor(11, 0);
+  lcd.write((byte)11);
+  lcd.setCursor(12, 0);
+  lcd.write((byte)12);
+  lcd.setCursor(13, 0);
+  lcd.write((byte)13);
+  lcd.setCursor(14, 0);
+  lcd.write((byte)14);
+  lcd.setCursor(15, 0);
+  lcd.write((byte)15);
+  }
+
+delay(500);
+}
